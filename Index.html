@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lucien Everett Morvane</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f3ef;
+      --text: #2a2a2a;
+      --accent: #6e5843;
+      --accent-dark: #4c3d2c;
+      --quote-bg: #f3efea;
+      --card-bg: #eae4db;
+      --nav-bg: #ede7df;
+    }
+
+    [data-theme="dark"] {
+      --bg: #1a1a1a;
+      --text: #e6e6e6;
+      --accent: #b59f83;
+      --accent-dark: #99876c;
+      --quote-bg: #2a2722;
+      --card-bg: #2f2b26;
+      --nav-bg: #24211e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    nav {
+      background-color: var(--nav-bg);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #cfc4b1;
+    }
+
+    .nav-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 500;
+      position: relative;
+    }
+
+    nav ul li a.active::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-dark);
+    }
+
+    .toggle-theme {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--accent);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem;
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 0 3rem 0;
+    }
+
+    header img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 1.2rem;
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    header h1 span {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    header p {
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
+    .section {
+      scroll-margin-top: 100px;
+    }
+
+    .about, .gallery, .music-player, .quote-slider {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: var(--card-bg);
+      border-radius: 14px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s ease;
+    }
+
+    .about h2, .gallery h2, .music-player h2, .quote-slider h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .about p {
+      font-size: 1rem;
+    }
+
+    .quote-slider {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-container {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .quote-slide {
+      min-width: 100%;
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      color: var(--accent);
+      background: var(--quote-bg);
+      padding: 1.5rem 2rem;
+      border-left: 4px solid var(--accent-dark);
+    }
+
+    .quote-controls {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .quote-controls button {
+      margin: 0 0.3rem;
+      padding: 0.4rem 0.9rem;
+      border: none;
+      background: var(--accent);
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .gallery {
+      text-align: center;
+    }
+
+    .gallery a {
+      display: inline-block;
+      text-decoration: none;
+      margin-top: 2rem;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.8rem 1.6rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .gallery a:hover {
+      background-color: var(--accent-dark);
+    }
+
+    .music-player {
+      text-align: center;
+    }
+
+    .music-slider {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .music-track {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .music-track iframe {
+      width: 100%;
+      border: none;
+      height: 152px;
+      flex-shrink: 0;
+      border-radius: 12px;
+    }
+
+    .music-controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.2rem;
+      gap: 1rem;
+    }
+
+    .music-controls button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .music-controls button:hover {
+      background: var(--accent-dark);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 0.85rem;
+      color: #999;
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <nav>
+    <div class="nav-title">Morvane</div>
+    <ul>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#quotes" class="nav-link">Quotes</a></li>
+      <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+      <li><a href="#music" class="nav-link">Music</a></li>
+    </ul>
+    <button class="toggle-theme" onclick="toggleTheme()">🌙</button>
+  </nav>
+
+  <div class="container">
+    <header>
+      <img src="https://i.pinimg.com/originals/56/4c/51/564c51b37c511d0ea15a8bac51522ce8.jpg" alt="Lucien Everett Morvane" />
+      <h1><span>Lucien Etherence Morvane</span></h1>
+      <p>Heir of the Morvane Estate | A gentleman of purpose and poise</p>
+    </header>
+
+    <section class="about section" id="about">
+      <h2>About</h2>
+      <p>Raised among marble halls and leather-bound books, Lucien Etherence Morvane is a man of quiet command. With a taste for tailored suits, vintage watches, and contemplative silences, he believes in heritage over hype. He walks the line between legacy and leadership — and does so impeccably.</p>
+    </section>
+
+    <section class="quote-slider section" id="quotes">
+      <h2>Quotations of Heritage</h2>
+      <div class="quote-container" id="quoteContainer">
+        <div class="quote-slide">“Tradition is not the worship of ashes, but the preservation of fire.” — Gustav Mahler</div>
+        <div class="quote-slide">“Elegance is when the inside is as beautiful as the outside.” — Coco Chanel</div>
+        <div class="quote-slide">“Style is a way to say who you are without having to speak.” — Rachel Zoe</div>
+        <div class="quote-slide">“Luxury lies not in richness and ornateness but in the absence of vulgarity.” — Coco Chanel</div>
+        <div class="quote-slide">“Quality is never an accident. It is always the result of intelligent effort.” — John Ruskin</div>
+      </div>
+      <div class="quote-controls">
+        <button onclick="prevQuote()">⏮</button>
+        <button onclick="nextQuote()">⏭</button>
+      </div>
+    </section>
+
+    <section class="gallery section" id="gallery">
+      <h2>Etherence's Private Gallery</h2>
+      <a href="gallery.html">Enter Gallery</a>
+    </section>
+
+    <section class="music-player section" id="music">
+      <h2>Château Mélancolie</h2>
+      <div class="music-slider">
+        <div class="music-track" id="musicTrack">
+          <iframe src="https://open.spotify.com/embed/track/7G7mSV4BebkoHWwKTDvXu9" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe src="https://open.spotify.com/embed/track/6zWSB11sqCRMTAuWYkccCt" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe src="https://open.spotify.com/embed/track/0vB4Vd6PtkJSEnWsmqATnZ" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe src="https://open.spotify.com/embed/track/4bp4kwe29qY9PBdrEgSa53" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe src="https://open.spotify.com/embed/track/4oHQ8n9OKQ3599e8noCrDX" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe src="https://open.spotify.com/embed/track/5BUq9bdtsm3LWw5laJeJ4R" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe src="https://open.spotify.com/embed/track/2ajUl8lBLAXOXNpG4NEPMz" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe src="https://open.spotify.com/embed/track/1iZgzgmsFsi0deffe0rleB" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe src="https://open.spotify.com/embed/track/4QxDOjgpYtQDxxbWPuEJOy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          <iframe src="https://open.spotify.com/embed/track/44AyOl4qVkzS48vBsbNXaC" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+        </div>
+      </div>
+      <div class="music-controls">
+        <button onclick="prevMusic()">⏮ Prev</button>
+        <button onclick="nextMusic()">⏭ Next</button>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Morvane & Co. Elegance is in restraint.</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const currentTheme = body.getAttribute("data-theme");
+      body.setAttribute("data-theme", currentTheme === "light" ? "dark" : "light");
+    }
+
+    let quoteIndex = 0;
+    const quoteContainer = document.getElementById("quoteContainer");
+    const totalQuotes = quoteContainer.children.length;
+
+    function updateQuote() {
+      quoteContainer.style.transform = `translateX(-${quoteIndex * 100}%)`;
+    }
+
+    function nextQuote() {
+      quoteIndex = (quoteIndex + 1) % totalQuotes;
+      updateQuote();
+    }
+
+    function prevQuote() {
+      quoteIndex = (quoteIndex - 1 + totalQuotes) % totalQuotes;
+      updateQuote();
+    }
+
+    let musicIndex = 0;
+    const musicTrack = document.getElementById("musicTrack");
+    const totalTracks = musicTrack.children.length;
+
+    function updateMusic() {
+      musicTrack.style.transform = `translateX(-${musicIndex * 100}%)`;
+    }
+
+    function nextMusic() {
+      musicIndex = (musicIndex + 1) % totalTracks;
+      updateMusic();
+    }
+
+    function prevMusic() {
+      musicIndex = (musicIndex - 1 + totalTracks) % totalTracks;
+      updateMusic();
+    }
+  </script>
+</body>
+</html>
